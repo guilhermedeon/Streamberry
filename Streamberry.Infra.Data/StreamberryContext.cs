@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Streamberry.Domain.Entities;
+using Streamberry.Interfaces.Database;
 
 namespace Streamberry.Infra.Data.Models;
 
-public class StreamberryContext : DbContext
+public class StreamberryContext : DbContext, IStreamberryContext
 {
     public StreamberryContext()
     {
@@ -29,6 +28,7 @@ public class StreamberryContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=C:\\Users\\guilh\\Desktop\\Streamberry\\Streamberry\\Streamberry.sqlite3");
     */
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Avaliacao>(entity =>

@@ -21,5 +21,4 @@ public class Avaliacao
     public virtual Filme? Filme { get; set; }
 
     public virtual Usuario? Usuario { get; set; }
-
 }
