@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Streamberry.Domain.Entities;
 
-public partial class Streaming
+public class Streaming
 {
     [Key]
     public int? Id { get; set; }

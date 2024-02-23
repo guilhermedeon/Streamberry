@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Streamberry.Domain.Entities;
 
-public partial class Usuario
+public class Usuario
 {
     [Key]
     public int? Id { get; set; }

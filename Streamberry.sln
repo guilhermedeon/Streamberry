@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.WebAPI", "Streamberry.WebAPI\Streamberry.WebAPI.csproj", "{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.WebAPI", "Streamberry.WebAPI\Streamberry.WebAPI.csproj", "{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Domain", "Streamberry.Domain\Streamberry.Domain.csproj", "{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Domain", "Streamberry.Domain\Streamberry.Domain.csproj", "{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Infra.Data", "Streamberry.Infra.Data\Streamberry.Infra.Data.csproj", "{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Infra.Data", "Streamberry.Infra.Data\Streamberry.Infra.Data.csproj", "{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Application", "Streamberry.Application\Streamberry.Application.csproj", "{185F2ABC-3205-4E90-AB18-63C18DE80470}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Application", "Streamberry.Application\Streamberry.Application.csproj", "{185F2ABC-3205-4E90-AB18-63C18DE80470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Interfaces", "Streamberry.Interfaces\Streamberry.Interfaces.csproj", "{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

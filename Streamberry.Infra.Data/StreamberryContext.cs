@@ -5,7 +5,7 @@ using Streamberry.Domain.Entities;
 
 namespace Streamberry.Infra.Data.Models;
 
-public partial class StreamberryContext : DbContext
+public class StreamberryContext : DbContext
 {
     public StreamberryContext()
     {
@@ -25,10 +25,10 @@ public partial class StreamberryContext : DbContext
     public virtual DbSet<Streaming> Streamings { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
-
+    /*
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=C:\\Users\\guilh\\Desktop\\Streamberry\\Streamberry\\Streamberry.sqlite3");
-
+    */
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Avaliacao>(entity =>
