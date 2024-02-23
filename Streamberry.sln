@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.WebAPI", "Streamberry.WebAPI\Streamberry.WebAPI.csproj", "{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Domain", "Streamberry.Domain\Streamberry.Domain.csproj", "{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Infra.Data", "Streamberry.Infra.Data\Streamberry.Infra.Data.csproj", "{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Application", "Streamberry.Application\Streamberry.Application.csproj", "{185F2ABC-3205-4E90-AB18-63C18DE80470}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8740E7-8C94-4499-A6DB-33F18C6A58DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185F2ABC-3205-4E90-AB18-63C18DE80470}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6E55B51-6D05-4C99-8C1B-5D6FF7DB2627}
+	EndGlobalSection
+EndGlobal
