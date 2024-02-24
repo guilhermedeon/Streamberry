@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.Entities;
-
-public partial class Streaming
+namespace Streamberry.Domain.Entities
 {
-    public int Id { get; set; }
+    public partial class Streaming : BaseEntity
+    {
 
-    public string Nome { get; set; } = null!;
+        [Required(ErrorMessage = "O nome do streaming é obrigatório.")]
+        public string Nome { get; set; } = null!;
 
-    public virtual ICollection<Filme> IdFilmes { get; set; } = new List<Filme>();
+        public ICollection<Filme> Filmes { get; set; } = new List<Filme>();
+    }
 }

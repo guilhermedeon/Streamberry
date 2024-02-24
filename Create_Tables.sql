@@ -1,15 +1,15 @@
 ﻿-- Create table for Filmes
 CREATE TABLE Filmes (
-    id INT PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo VARCHAR(255) UNIQUE NOT NULL,
     mes_lancamento VARCHAR(255),
     ano_lancamento INT
 );
 
 -- Create table for Generos
 CREATE TABLE Generos (
-    id INT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- Create table for the many-to-many relationship between Filmes and Generos
@@ -23,8 +23,8 @@ CREATE TABLE FilmesGeneros (
 
 -- Create table for Streaming
 CREATE TABLE Streaming (
-    id INT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- Create table for the many-to-many relationship between Filmes and Streaming
@@ -38,7 +38,7 @@ CREATE TABLE FilmesStreaming (
 
 -- Create table for Avaliacoes
 CREATE TABLE Avaliacoes (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     classificacao INT,
     comentario TEXT,
     id_filme INT,
@@ -49,8 +49,8 @@ CREATE TABLE Avaliacoes (
 
 -- Create table for Usuarios
 CREATE TABLE Usuarios (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
     senha VARCHAR(255) NOT NULL
 );

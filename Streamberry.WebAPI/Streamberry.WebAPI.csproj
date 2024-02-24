@@ -16,11 +16,10 @@
  </ItemGroup>
 
  <ItemGroup>
+  <ProjectReference Include="..\Streamberry.Application\Streamberry.Application.csproj" />
+  <ProjectReference Include="..\Streamberry.Domain\Streamberry.Domain.csproj" />
   <ProjectReference Include="..\Streamberry.Infra.Data\Streamberry.Infra.Data.csproj" />
- </ItemGroup>
-
- <ItemGroup>
-   <Folder Include="Controllers\" />
+  <ProjectReference Include="..\Streamberry.Interfaces\Streamberry.Interfaces.csproj" />
  </ItemGroup>
 
 </Project>

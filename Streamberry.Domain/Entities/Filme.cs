@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.Entities;
-public partial class Filme
+namespace Streamberry.Domain.Entities
 {
-    public int Id { get; set; }
+    public partial class Filme : BaseEntity
+    {
 
-    public string Titulo { get; set; } = null!;
+        [Required(ErrorMessage = "O título do filme é obrigatório.")]
+        public string Titulo { get; set; } = null!;
 
-    public string? MesLancamento { get; set; }
+        [Required(ErrorMessage = "O mês de lançamento do filme é obrigatório.")]
+        public string? MesLancamento { get; set; }
 
-    public int? AnoLancamento { get; set; }
+        [Required(ErrorMessage = "O ano de lançamento do filme é obrigatório.")]
+        public int? AnoLancamento { get; set; }
 
-    public virtual ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
+        public ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
 
-    public virtual ICollection<Genero> IdGeneros { get; set; } = new List<Genero>();
+        public ICollection<Genero> Generos { get; set; } = new List<Genero>();
 
-    public virtual ICollection<Streaming> IdStreamings { get; set; } = new List<Streaming>();
+        public ICollection<Streaming> Streamings { get; set; } = new List<Streaming>();
+    }
 }

@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{A768EE7E-E
 	ProjectSection(SolutionItems) = preProject
 		Create_Tables.sql = Create_Tables.sql
 		Streamberry.sqlite3 = Streamberry.sqlite3
+		Insert_Samples.sql = Insert_Samples.sql
 	EndProjectSection
 EndProject
 Global

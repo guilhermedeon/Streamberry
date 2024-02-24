@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.Entities
+namespace Streamberry.Domain.DTOs
 {
-    public partial class Avaliacao : BaseEntity
+    public class AvaliacaoRequestDTO
     {
-
         [Required(ErrorMessage = "A classificação é obrigatória.")]
         public int? Classificacao { get; set; }
 
@@ -18,9 +15,5 @@ namespace Streamberry.Domain.Entities
 
         [Required(ErrorMessage = "O Id do usuário é obrigatório.")]
         public int? IdUsuario { get; set; }
-
-        public Filme? Filme { get; set; }
-
-        public Usuario? Usuario { get; set; }
     }
 }

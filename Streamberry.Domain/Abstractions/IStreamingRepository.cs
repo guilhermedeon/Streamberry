@@ -1,6 +1,9 @@
-﻿namespace Streamberry.Domain.Abstractions
+﻿using Streamberry.Domain.Entities;
+
+namespace Streamberry.Domain.Abstractions
 {
-    public interface IStreamingRepository
+    public interface IStreamingRepository : IBaseRepository<Streaming>
     {
+
     }
 }

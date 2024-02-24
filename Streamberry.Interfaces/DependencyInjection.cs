@@ -4,7 +4,7 @@ using Streamberry.Interfaces.Database.Repositories;
 
 namespace Streamberry.Interfaces
 {
-    internal static class DependencyInjection
+    public static class DependencyInjection
     {
         public static IServiceCollection AddInterfaces(this IServiceCollection services)
         {

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.Entities;
-
-public partial class Genero
+namespace Streamberry.Domain.Entities
 {
-    public int Id { get; set; }
+    public partial class Genero : BaseEntity
+    {
 
-    public string Nome { get; set; } = null!;
+        [Required(ErrorMessage = "O nome do gênero é obrigatório.")]
+        public string Nome { get; set; } = null!;
 
-    public virtual ICollection<Filme> IdFilmes { get; set; } = new List<Filme>();
+        public ICollection<Filme> Filmes { get; set; } = new List<Filme>();
+    }
 }

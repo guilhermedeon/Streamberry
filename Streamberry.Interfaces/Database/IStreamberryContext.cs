@@ -10,5 +10,7 @@ namespace Streamberry.Interfaces.Database
         DbSet<Genero> Generos { get; set; }
         DbSet<Streaming> Streamings { get; set; }
         DbSet<Usuario> Usuarios { get; set; }
+
+        public Task SaveChangesAsync();
     }
 }

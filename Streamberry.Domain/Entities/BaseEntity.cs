@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Streamberry.Application.DTO.GeneroDTO
+namespace Streamberry.Domain.Entities
 {
-    public class GeneroResponse
+    public class BaseEntity
     {
+        [Key]
         public int Id { get; set; }
-        public string Nome { get; set; }
     }
 }

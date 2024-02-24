@@ -1,13 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+using Streamberry.Application;
 using Streamberry.Infra.Data;
+using Streamberry.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<StreamberryContext>
-                (x => x.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+
+//Add Streamberry Classes
+builder.Services.AddApplicationLayer();
+builder.Services.AddInterfaces();
+builder.Services.AddInfraData();
+
+//Add and Setup WebAPI specific Classes
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
