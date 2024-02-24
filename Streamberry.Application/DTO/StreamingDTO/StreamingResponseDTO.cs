@@ -16,7 +16,7 @@ namespace Streamberry.Domain.DTOs
             Nome = streaming.Nome;
 
             excludes.Add(this.GetType());
-            if (!excludes.Contains(typeof(FilmeResponseDTO)))
+            if (!excludes.Contains(typeof(FilmeResponseDTO)) && streaming.Filmes.Count > 0)
             {
                 Filmes = new List<FilmeResponseDTO>();
                 foreach (var filme in streaming.Filmes)

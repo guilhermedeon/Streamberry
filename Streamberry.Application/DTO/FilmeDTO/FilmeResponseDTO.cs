@@ -22,7 +22,7 @@ namespace Streamberry.Domain.DTOs
             MesLancamento = filme.MesLancamento;
             AnoLancamento = filme.AnoLancamento;
             excludes.Add(this.GetType());
-            if (!excludes.Contains(typeof(AvaliacaoResponseDTO)))
+            if (!excludes.Contains(typeof(AvaliacaoResponseDTO)) && filme.Avaliacoes.Count > 0)
             {
                 Avaliacoes = new();
                 foreach (var avaliacao in filme.Avaliacoes)
@@ -30,7 +30,7 @@ namespace Streamberry.Domain.DTOs
                     Avaliacoes.Add(new(avaliacao, excludes));
                 }
             }
-            if (!excludes.Contains(typeof(GeneroResponseDTO)))
+            if (!excludes.Contains(typeof(GeneroResponseDTO)) && filme.Generos.Count > 0)
             {
                 Generos = new();
                 foreach (var genero in filme.Generos)
@@ -38,7 +38,7 @@ namespace Streamberry.Domain.DTOs
                     Generos.Add(new(genero, excludes));
                 }
             }
-            if (!excludes.Contains(typeof(StreamingResponseDTO)))
+            if (!excludes.Contains(typeof(StreamingResponseDTO)) && filme.Streamings.Count > 0)
             {
                 Streamings = new();
                 foreach (var streaming in filme.Streamings)

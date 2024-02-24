@@ -12,10 +12,12 @@ namespace Streamberry.WebAPI.Controllers
     public class GenerosController : ControllerBase
     {
         private readonly GeneroService _generoService;
+        private readonly FilmeService _filmeService;
 
-        public GenerosController(GeneroService generoService)
+        public GenerosController(GeneroService generoService, FilmeService filmeService)
         {
             _generoService = generoService;
+            _filmeService = filmeService;
         }
 
 
@@ -31,8 +33,8 @@ namespace Streamberry.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("GetGenero")]
-        public async Task<ActionResult<Genero>> GetGenero(int id)
+        [HttpGet("GetGeneroById")]
+        public async Task<ActionResult<GeneroResponseDTO>> GetGeneroById(int id)
         {
             var genero = await _generoService.GetById(id);
             if (genero == null)
@@ -43,8 +45,20 @@ namespace Streamberry.WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetGeneroByName")]
+        public async Task<ActionResult<GeneroResponseDTO>> GetGeneroByName(string nome)
+        {
+            var genero = _generoService.GetByName(nome);
+            if (genero == null)
+            {
+                return NotFound();
+            }
+            var response = new GeneroResponseDTO(genero);
+            return Ok(response);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Genero>> PostGenero(GeneroRequestDTO generoRequest)
+        public async Task<ActionResult<GeneroResponseDTO>> PostGenero(GeneroRequestDTO generoRequest)
         {
             if (_generoService.GetByName(generoRequest.Nome) != null)
             {
@@ -52,16 +66,16 @@ namespace Streamberry.WebAPI.Controllers
             }
             else
             {
-                Genero Genero = new Genero();
-                Genero.Nome = generoRequest.Nome;
-                _generoService.Add(Genero);
+                Genero genero = new Genero();
+                genero.Nome = generoRequest.Nome;
+                _generoService.Add(genero);
 
-                return CreatedAtAction("GetGenero", Genero.Id, Genero);
+                return CreatedAtAction("GetGenero", genero.Id, genero);
             }
         }
 
         [HttpPut]
-        public async Task<ActionResult<Genero>> PutGenero(int id, GeneroRequestDTO generoRequest)
+        public async Task<ActionResult<GeneroResponseDTO>> UpdateGenero(int id, GeneroRequestDTO generoRequest)
         {
             var genero = await _generoService.GetById(id);
             if (genero == null)
@@ -76,8 +90,42 @@ namespace Streamberry.WebAPI.Controllers
             }
         }
 
+        [HttpPut("AddFilme")]
+        public async Task<ActionResult<GeneroResponseDTO>> AddFilme(int id, int filmeId)
+        {
+            var genero = await _generoService.GetById(id);
+            var filme = await _filmeService.GetById(filmeId);
+            if (genero == null || filme == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                genero.Filmes.Add(filme);
+                _generoService.Update(genero);
+                return NoContent();
+            }
+        }
+
+        [HttpPut("RemoveFilme")]
+        public async Task<ActionResult> RemoveFilme(int id, int filmeId)
+        {
+            var genero = await _generoService.GetById(id);
+            var filme = await _filmeService.GetById(filmeId);
+            if (genero == null || filme == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                genero.Filmes.Remove(filme);
+                _generoService.Update(genero);
+                return NoContent();
+            }
+        }
+
         [HttpDelete]
-        public async Task<ActionResult<Genero>> DeleteGenero(int id)
+        public async Task<ActionResult> DeleteGenero(int id)
         {
             var genero = await _generoService.GetById(id);
             if (genero == null)

@@ -13,7 +13,5 @@ namespace Streamberry.Domain.DTOs
         [Required(ErrorMessage = "O Id do filme é obrigatório.")]
         public int? IdFilme { get; set; }
 
-        [Required(ErrorMessage = "O Id do usuário é obrigatório.")]
-        public int? IdUsuario { get; set; }
     }
 }

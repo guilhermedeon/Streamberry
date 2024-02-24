@@ -16,5 +16,10 @@ namespace Streamberry.Application.Services
         {
             _filmeRepository = filmeRepository;
         }
+
+        public Filme GetByTitle(string nome)
+        {
+            return _filmeRepository.GetAll().Result.FirstOrDefault(f => f.Titulo == nome);
+        }
     }
 }

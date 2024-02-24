@@ -18,7 +18,7 @@ namespace Streamberry.Domain.DTOs
             Id = usuario.Id;
             Nome = usuario.Nome;
             Email = usuario.Email;
-            if(!excludes.Contains(typeof(AvaliacaoResponseDTO)))
+            if(!excludes.Contains(typeof(AvaliacaoResponseDTO)) && usuario.Avaliacoes.Count > 0)
             {
                 Avaliacoes = new List<AvaliacaoResponseDTO>();
                 foreach (var avaliacao in usuario.Avaliacoes)

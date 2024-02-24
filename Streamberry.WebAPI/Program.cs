@@ -13,7 +13,8 @@ builder.Services.AddInterfaces();
 builder.Services.AddInfraData();
 
 //Add and Setup WebAPI specific Classes
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

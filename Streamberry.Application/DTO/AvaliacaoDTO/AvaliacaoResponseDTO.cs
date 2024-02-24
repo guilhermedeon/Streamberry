@@ -20,12 +20,12 @@ namespace Streamberry.Domain.DTOs
             Classificacao = avaliacao.Classificacao;
             Comentario = avaliacao.Comentario;
             excludes.Add (typeof (AvaliacaoResponseDTO));
-            if (!excludes.Contains(typeof (FilmeResponseDTO)))
+            if (!excludes.Contains(typeof (FilmeResponseDTO)) && avaliacao.Filme != null)
             {
                 excludes.Add (typeof (AvaliacaoResponseDTO));
                 Filme = new FilmeResponseDTO(avaliacao.Filme, excludes);
             }
-            if (!excludes.Contains(typeof (UsuarioResponseDTO)))
+            if (!excludes.Contains(typeof (UsuarioResponseDTO)) && avaliacao.Usuario != null)
             {
                 Usuario = new UsuarioResponseDTO(avaliacao.Usuario);
             }

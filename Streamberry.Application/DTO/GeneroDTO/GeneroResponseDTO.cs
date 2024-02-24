@@ -16,7 +16,7 @@ namespace Streamberry.Domain.DTOs
             Id = genero.Id;
             Nome = genero.Nome;
             excludes.Add(typeof(GeneroResponseDTO));
-            if (!excludes.Contains(typeof(FilmeResponseDTO)))
+            if (!excludes.Contains(typeof(FilmeResponseDTO)) && genero.Filmes.Count > 0)
             {
                 Filmes = new List<FilmeResponseDTO>();
                 foreach (var filme in genero.Filmes)

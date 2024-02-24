@@ -1,11 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Streamberry.Application.Services;
+using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
 using Streamberry.Infra.Data;
 
@@ -15,109 +11,153 @@ namespace Streamberry.WebAPI.Controllers
     [ApiController]
     public class FilmesController : ControllerBase
     {
-        private readonly StreamberryContext _context;
+        private readonly FilmeService _filmeService;
+        private readonly GeneroService _generoService;
+        private readonly StreamingService streamingService;
 
-        public FilmesController(StreamberryContext context)
+        public FilmesController(FilmeService filmeService, GeneroService generoService, StreamingService streamingService)
         {
-            _context = context;
+            _filmeService = filmeService;
+            _generoService = generoService;
+            this.streamingService = streamingService;
         }
 
         // GET: api/Filmes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Filme>>> GetFilmes()
+        [HttpGet("GetAllFilmes")]
+        public async Task<ActionResult<IEnumerable<Filme>>> GetAllFilmes()
         {
-            return await _context.Filmes.Include(x => x.Generos).ToListAsync();
+            var filmes = await _filmeService.GetAll();
+            var result = new List<FilmeResponseDTO>();
+            foreach (var filme in filmes)
+            {
+                result.Add(new FilmeResponseDTO(filme));
+            }
+            return Ok(result);
         }
 
-        // GET: api/Filmes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Filme>> GetFilme(int id)
+        [HttpGet("GetFilmeById")]
+        public async Task<ActionResult<Filme>> GetFilmeById(int id)
         {
-            var filme = await _context.Filmes.FindAsync(id);
-
+            var filme = await _filmeService.GetById(id);
             if (filme == null)
             {
                 return NotFound();
             }
-
-            return filme;
+            var result = new FilmeResponseDTO(filme);
+            return Ok(result);
         }
 
-        // PUT: api/Filmes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFilme(int id, Filme filme)
+        [HttpGet("GetFilmeByTitle")]
+        public async Task<ActionResult<Filme>> GetFilmeByTitle(string titulo)
         {
-            if (id != filme.Id)
+            var filme = _filmeService.GetByTitle(titulo);
+            if (filme == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-
-            _context.Entry(filme).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FilmeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            var result = new FilmeResponseDTO(filme);
+            return Ok(result);
         }
 
-        // POST: api/Filmes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Filme>> PostFilme(Filme filme)
+        public async Task<ActionResult<Filme>> PostFilme(FilmeRequestDTO filme)
         {
-            _context.Filmes.Add(filme);
-            try
+            if (_filmeService.GetByTitle(filme.Titulo) != null)
             {
-                await _context.SaveChangesAsync();
+                return Conflict();
             }
-            catch (DbUpdateException)
+            var filmeEntity = new Filme()
             {
-                if (FilmeExists(filme.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetFilme", new { id = filme.Id }, filme);
+                Titulo = filme.Titulo,
+                AnoLancamento = filme.AnoLancamento,
+                MesLancamento = filme.MesLancamento
+            };
+            _filmeService.Add(filmeEntity);
+            return CreatedAtAction("GetFilmeById", filmeEntity.Id , filmeEntity);
         }
 
-        // DELETE: api/Filmes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFilme(int id)
+        [HttpPut]
+        public async Task<IActionResult> PutFilme(int id, FilmeRequestDTO filme)
         {
-            var filme = await _context.Filmes.FindAsync(id);
+            var filmeEntity = await _filmeService.GetById(id);
+            if (filmeEntity == null)
+            {
+                return NotFound();
+            }
+            filmeEntity.Titulo = filme.Titulo;
+            filmeEntity.AnoLancamento = filme.AnoLancamento;
+            filmeEntity.MesLancamento = filme.MesLancamento;
+            _filmeService.Update(filmeEntity);
+            return NoContent();
+        }
+
+        [HttpPut("AddGenero")]
+        public async Task<IActionResult> AddGenero(int id, int generoId)
+        {
+            var filme = await _filmeService.GetById(id);
+            var genero = await _generoService.GetById(generoId);
+            if (filme == null || genero == null)
+            {
+                return NotFound();
+            }
+            filme.Generos.Add(genero);
+            _filmeService.Update(filme);
+            return NoContent();
+        }
+
+        [HttpPut("RemoveGenero")]
+        public async Task<IActionResult> RemoveGenero(int id, int generoId)
+        {
+            var filme = await _filmeService.GetById(id);
+            var genero = await _generoService.GetById(generoId);
+            if (filme == null || genero == null)
+            {
+                return NotFound();
+            }
+            filme.Generos.Remove(genero);
+            _filmeService.Update(filme);
+            return NoContent();
+        }
+
+        [HttpPut("AddStreaming")]
+        public async Task<IActionResult> AddStreaming(int id, int streamingId)
+        {
+            var filme = await _filmeService.GetById(id);
+            var streaming = await streamingService.GetById(streamingId);
+            if (filme == null || streaming == null)
+            {
+                return NotFound();
+            }
+            filme.Streamings.Add(streaming);
+            _filmeService.Update(filme);
+            return NoContent();
+        }
+
+        [HttpPut("RemoveStreaming")]
+        public async Task<IActionResult> RemoveStreaming(int id, int streamingId)
+        {
+            var filme = await _filmeService.GetById(id);
+            var streaming = await streamingService.GetById(streamingId);
+            if (filme == null || streaming == null)
+            {
+                return NotFound();
+            }
+            filme.Streamings.Remove(streaming);
+            _filmeService.Update(filme);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<Filme>> DeleteFilme(int id)
+        {
+            var filme = await _filmeService.GetById(id);
             if (filme == null)
             {
                 return NotFound();
             }
-
-            _context.Filmes.Remove(filme);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool FilmeExists(int id)
-        {
-            return _context.Filmes.Any(e => e.Id == id);
+            _filmeService.Remove(filme);
+            return filme;
         }
     }
 }
+

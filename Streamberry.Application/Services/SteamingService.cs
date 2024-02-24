@@ -15,5 +15,10 @@ namespace Streamberry.Application.Services
         {
             _steamingRepository = repository;
         }
+
+        public async Task<Streaming> GetByName(string name)
+        {
+            return _steamingRepository.GetAll().Result.FirstOrDefault(s => s.Nome == name);
+        }
     }
 }
