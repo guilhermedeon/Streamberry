@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Streamberry.Infra.Data.Models;
 using Streamberry.Interfaces.Database;
 
 namespace Streamberry.Infra.Data

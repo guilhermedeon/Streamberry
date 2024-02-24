@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Streamberry.Infra.Data.Models;
+using Streamberry.Infra.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Streamberry.Domain.Entities;
 
-public class Streaming
+public partial class Streaming
 {
-    [Key]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public string Nome { get; set; } = null!;
+
+    public virtual ICollection<Filme> IdFilmes { get; set; } = new List<Filme>();
 }

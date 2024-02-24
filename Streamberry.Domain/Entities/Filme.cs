@@ -1,23 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Streamberry.Domain.Entities;
-
-public class Filme
+public partial class Filme
 {
-    [Key]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public string Titulo { get; set; } = null!;
 
-    public int? MesLancamento { get; set; }
+    public string? MesLancamento { get; set; }
 
     public int? AnoLancamento { get; set; }
 
     public virtual ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
 
-    [ForeignKey("Genero")]
-    public int? GeneroId { get; set; }
+    public virtual ICollection<Genero> IdGeneros { get; set; } = new List<Genero>();
 
-    public virtual Genero? Genero { get; set; }
+    public virtual ICollection<Streaming> IdStreamings { get; set; } = new List<Streaming>();
 }

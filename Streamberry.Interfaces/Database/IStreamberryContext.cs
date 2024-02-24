@@ -5,7 +5,7 @@ namespace Streamberry.Interfaces.Database
 {
     public interface IStreamberryContext
     {
-        DbSet<Avaliacao> Avaliacaoes { get; set; }
+        DbSet<Avaliacao> Avaliacoes { get; set; }
         DbSet<Filme> Filmes { get; set; }
         DbSet<Genero> Generos { get; set; }
         DbSet<Streaming> Streamings { get; set; }

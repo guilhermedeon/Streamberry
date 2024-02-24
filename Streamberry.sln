@@ -11,7 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Infra.Data", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Application", "Streamberry.Application\Streamberry.Application.csproj", "{185F2ABC-3205-4E90-AB18-63C18DE80470}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamberry.Interfaces", "Streamberry.Interfaces\Streamberry.Interfaces.csproj", "{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamberry.Interfaces", "Streamberry.Interfaces\Streamberry.Interfaces.csproj", "{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9D883E27-7918-4BF2-A19C-1A63C64BC93D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{A768EE7E-E820-412A-8011-2C3DF42D909F}"
+	ProjectSection(SolutionItems) = preProject
+		Create_Tables.sql = Create_Tables.sql
+		Streamberry.sqlite3 = Streamberry.sqlite3
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +50,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FF8740E7-8C94-4499-A6DB-33F18C6A58DF} = {9D883E27-7918-4BF2-A19C-1A63C64BC93D}
+		{4B1A3AA5-E13E-4D68-8EC3-F488B85C14F5} = {9D883E27-7918-4BF2-A19C-1A63C64BC93D}
+		{E2BA375C-D29C-4132-BC3C-7842EFBF2D8A} = {9D883E27-7918-4BF2-A19C-1A63C64BC93D}
+		{185F2ABC-3205-4E90-AB18-63C18DE80470} = {9D883E27-7918-4BF2-A19C-1A63C64BC93D}
+		{7F482F53-5D9F-4AE3-BE13-9F8CB71FB0F8} = {9D883E27-7918-4BF2-A19C-1A63C64BC93D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6E55B51-6D05-4C99-8C1B-5D6FF7DB2627}

@@ -1,22 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Streamberry.Domain.Entities;
 
-public class Avaliacao
+public partial class Avaliacao
 {
-    [Key]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public int? Classificacao { get; set; }
 
     public string? Comentario { get; set; }
 
-    [ForeignKey("Filme")]
-    public int? FilmeId { get; set; }
+    public int? IdFilme { get; set; }
 
-    [ForeignKey("Usuario")]
-    public int? UsuarioId { get; set; }
+    public int? IdUsuario { get; set; }
 
     public virtual Filme? Filme { get; set; }
 

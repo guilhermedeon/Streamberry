@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Streamberry.Domain.Entities;
 
-public class Usuario
+public partial class Usuario
 {
-    [Key]
-    public int? Id { get; set; }
+    public int Id { get; set; }
 
     public string Nome { get; set; } = null!;
 
