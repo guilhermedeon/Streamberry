@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Application.DTO.UsuarioDTO
+namespace Streamberry.WebAPI.DTO.UsuarioDTO
 {
-    public class UsuarioLoginRequestDTO
+    public class UsuarioRegisterRequestDTO
     {
+        [Required(ErrorMessage = "O nome do usuário é obrigatório.")]
+        public string Nome { get; set; }
+
         [Required(ErrorMessage = "O email do usuário é obrigatório.")]
         [EmailAddress(ErrorMessage = "O email do usuário não é válido.")]
         public string Email { get; set; }

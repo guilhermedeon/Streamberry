@@ -22,12 +22,12 @@ namespace Streamberry.Interfaces.Database.Repositories
 
         public async Task<IEnumerable<Filme>> GetAll()
         {
-            return await _context.Filmes.Include(t => t.Generos).Include(t => t.Streamings).Include(t => t.Streamings).ToListAsync();
+            return await _context.Filmes.Include(t => t.Generos).Include(t => t.Streamings).Include(t => t.Avaliacoes).ToListAsync();
         }
 
         public async Task<Filme> GetById(int id)
         {
-            return await _context.Filmes.Include(t => t.Generos).Include(t => t.Streamings).Include(t => t.Streamings).FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Filmes.Include(t => t.Generos).Include(t => t.Streamings).Include(t => t.Avaliacoes).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public void Remove(Filme entity)

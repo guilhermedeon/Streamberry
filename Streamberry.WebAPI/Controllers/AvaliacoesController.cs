@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Streamberry.Application.Services;
-using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
+using Streamberry.WebAPI.DTO.AvaliacaoDTO;
 
 namespace Streamberry.WebAPI.Controllers
 {

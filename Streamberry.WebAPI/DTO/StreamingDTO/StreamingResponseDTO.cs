@@ -1,6 +1,7 @@
 ﻿using Streamberry.Domain.Entities;
+using Streamberry.WebAPI.DTO.FilmeDTO;
 
-namespace Streamberry.Domain.DTOs
+namespace Streamberry.WebAPI.DTO.StreamingDTO
 {
     public class StreamingResponseDTO
     {
@@ -15,7 +16,7 @@ namespace Streamberry.Domain.DTOs
             Id = streaming.Id;
             Nome = streaming.Nome;
 
-            excludes.Add(this.GetType());
+            excludes.Add(GetType());
             if (!excludes.Contains(typeof(FilmeResponseDTO)) && streaming.Filmes.Count > 0)
             {
                 Filmes = new List<FilmeResponseDTO>();

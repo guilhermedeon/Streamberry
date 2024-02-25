@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Streamberry.Application.DTO.UsuarioDTO;
 using Streamberry.Application.Services;
-using Streamberry.Domain.DTOs;
+using Streamberry.WebAPI.DTO.UsuarioDTO;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

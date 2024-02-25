@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
-using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
 using Streamberry.Infra.Data;
+using Streamberry.WebAPI.DTO.FilmeDTO;
+using System.ComponentModel.DataAnnotations;
 
 namespace Streamberry.WebAPI.Controllers
 {
@@ -26,9 +27,15 @@ namespace Streamberry.WebAPI.Controllers
 
         // GET: api/Filmes
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<FilmeResponseDTO>>> GetAllFilmes()
+        public async Task<ActionResult<IEnumerable<FilmeResponseDTO>>> GetAllFilmes(bool paging,int? pageNumber, int? pageSize)
         {
-            var filmes = await _filmeService.GetAll();
+            var filmesDb = await _filmeService.GetAll();
+            var filmes = filmesDb;
+            if (paging && pageNumber != null && pageSize != null)
+            {
+                filmes = filmesDb.Skip((int)((pageNumber - 1) * pageSize)).Take((int)pageSize);
+            }
+
             var result = new List<FilmeResponseDTO>();
             foreach (var filme in filmes)
             {
@@ -58,6 +65,40 @@ namespace Streamberry.WebAPI.Controllers
                 return NotFound();
             }
             var result = new FilmeResponseDTO(filme);
+            return Ok(result);
+        }
+
+        [HttpGet("GetFilmesByYear")]
+        public async Task<ActionResult<IEnumerable<FilmesByYearResponse>>> GetFilmeByYear(int ano)
+        {
+            var filmes = await _filmeService.GetAll();
+            var result = new FilmesByYearResponse();
+            result.Filmes = new List<FilmeResponseDTO>();
+            foreach (var filme in filmes)
+            {
+                if (filme.AnoLancamento == ano)
+                {
+                    result.Filmes.Add(new FilmeResponseDTO(filme));
+                }
+            }
+            result.Ammount = result.Filmes.Count;
+            return Ok(result);
+        }
+
+        [HttpGet("GetFilmesByRank")]
+        public async Task<ActionResult<IEnumerable<FilmesByRankResponse>>> GetFilmesByRank(int rank)
+        {
+            var filmes = await _filmeService.GetAll();
+            List<FilmeResponseDTO> filmeResponseDTOs = new List<FilmeResponseDTO>();
+            foreach (var filme in filmes)
+            {
+                filmeResponseDTOs.Add(new FilmeResponseDTO(filme));
+            }
+            filmeResponseDTOs = filmeResponseDTOs.Where(x => x.MediaAvaliacao == rank).ToList();
+
+            var result = new FilmesByRankResponse();
+            result.Classificacao = rank;
+            result.Filmes = filmeResponseDTOs;
             return Ok(result);
         }
 

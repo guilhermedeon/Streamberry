@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
-using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
 using Streamberry.Infra.Data;
+using Streamberry.WebAPI.DTO.GeneroDTO;
 
 namespace Streamberry.WebAPI.Controllers
 {

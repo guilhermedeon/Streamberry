@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.DTOs
+namespace Streamberry.WebAPI.DTO.FilmeDTO
 {
     public class FilmeRequestDTO
     {
@@ -8,9 +8,9 @@ namespace Streamberry.Domain.DTOs
         public string Titulo { get; set; }
 
         [Required(ErrorMessage = "O mês de lançamento do filme é obrigatório.")]
-        public string? MesLancamento { get; set; }
+        public string MesLancamento { get; set; }
 
         [Required(ErrorMessage = "O ano de lançamento do filme é obrigatório.")]
-        public int? AnoLancamento { get; set; }
+        public int AnoLancamento { get; set; }
     }
 }

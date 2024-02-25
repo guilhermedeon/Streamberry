@@ -117,6 +117,8 @@ public partial class StreamberryContext : DbContext, IStreamberryContext
                             .HasColumnType("INT")
                             .HasColumnName("id_streaming");
                     });
+
+            entity.HasMany(d => d.Avaliacoes).WithOne(p => p.Filme).HasForeignKey(e => e.IdFilme).OnDelete(DeleteBehavior.ClientSetNull);
         });
 
         modelBuilder.Entity<Genero>(entity =>

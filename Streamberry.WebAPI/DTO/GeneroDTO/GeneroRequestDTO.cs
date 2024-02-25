@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Streamberry.Domain.DTOs
+namespace Streamberry.WebAPI.DTO.GeneroDTO
 {
     public class GeneroRequestDTO
     {

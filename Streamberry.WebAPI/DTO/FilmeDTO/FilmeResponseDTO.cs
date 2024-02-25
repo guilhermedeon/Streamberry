@@ -1,14 +1,18 @@
 ﻿using Streamberry.Domain.Entities;
+using Streamberry.WebAPI.DTO.AvaliacaoDTO;
+using Streamberry.WebAPI.DTO.GeneroDTO;
+using Streamberry.WebAPI.DTO.StreamingDTO;
 using System.Collections.Generic;
 
-namespace Streamberry.Domain.DTOs
+namespace Streamberry.WebAPI.DTO.FilmeDTO
 {
     public class FilmeResponseDTO
     {
         public int Id { get; set; }
         public string Titulo { get; set; }
-        public string? MesLancamento { get; set; }
-        public int? AnoLancamento { get; set; }
+        public string MesLancamento { get; set; }
+        public int AnoLancamento { get; set; }
+        public double? MediaAvaliacao { get; set; }
         public List<AvaliacaoResponseDTO> Avaliacoes { get; set; }
         public List<GeneroResponseDTO> Generos { get; set; }
         public List<StreamingResponseDTO> Streamings { get; set; }
@@ -21,7 +25,7 @@ namespace Streamberry.Domain.DTOs
             Titulo = filme.Titulo;
             MesLancamento = filme.MesLancamento;
             AnoLancamento = filme.AnoLancamento;
-            excludes.Add(this.GetType());
+            excludes.Add(GetType());
             if (!excludes.Contains(typeof(AvaliacaoResponseDTO)) && filme.Avaliacoes.Count > 0)
             {
                 Avaliacoes = new();
@@ -29,6 +33,7 @@ namespace Streamberry.Domain.DTOs
                 {
                     Avaliacoes.Add(new(avaliacao, excludes));
                 }
+                MediaAvaliacao = CalcularMediaAvaliacao(Avaliacoes);
             }
             if (!excludes.Contains(typeof(GeneroResponseDTO)) && filme.Generos.Count > 0)
             {
@@ -46,6 +51,20 @@ namespace Streamberry.Domain.DTOs
                     Streamings.Add(new(streaming, excludes));
                 }
             }
+        }
+
+        private double? CalcularMediaAvaliacao(List<AvaliacaoResponseDTO> avaliacoes)
+        {
+            if (avaliacoes.Count == 0)
+            {
+                return null;
+            }
+            double media = 0;
+            foreach (var avaliacao in avaliacoes)
+            {
+                media += avaliacao.Classificacao;
+            }
+            return media / avaliacoes.Count;
         }
     }
 }

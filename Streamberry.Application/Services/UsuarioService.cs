@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Streamberry.Domain.Abstractions;
-using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -65,7 +64,7 @@ namespace Streamberry.Application.Services
             return await Authenticate(email, senha);
         }
 
-        public async Task<UsuarioResponseDTO> GetUserFromJWT(string token)
+        public async Task<Usuario> GetUserFromJWT(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(configuration.GetSection("SigningKey").Value);
@@ -84,7 +83,7 @@ namespace Streamberry.Application.Services
                 throw new SecurityTokenException("Invalid token");
             var email = principal.FindFirst(ClaimTypes.Email)?.Value;
             var user = await GetByEmail(email);
-            return new UsuarioResponseDTO(user);
+            return user;
         }
 
         public async Task<Usuario> GetByEmail(string email)

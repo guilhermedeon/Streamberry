@@ -1,6 +1,7 @@
 ﻿using Streamberry.Domain.Entities;
+using Streamberry.WebAPI.DTO.AvaliacaoDTO;
 
-namespace Streamberry.Domain.DTOs
+namespace Streamberry.WebAPI.DTO.UsuarioDTO
 {
     public class UsuarioResponseDTO
     {
@@ -18,12 +19,12 @@ namespace Streamberry.Domain.DTOs
             Id = usuario.Id;
             Nome = usuario.Nome;
             Email = usuario.Email;
-            if(!excludes.Contains(typeof(AvaliacaoResponseDTO)) && usuario.Avaliacoes.Count > 0)
+            if (!excludes.Contains(typeof(AvaliacaoResponseDTO)) && usuario.Avaliacoes.Count > 0)
             {
                 Avaliacoes = new List<AvaliacaoResponseDTO>();
                 foreach (var avaliacao in usuario.Avaliacoes)
                 {
-                    Avaliacoes.Add(new AvaliacaoResponseDTO(avaliacao));
+                    Avaliacoes.Add(new AvaliacaoResponseDTO(avaliacao, excludes));
                 }
             }
         }

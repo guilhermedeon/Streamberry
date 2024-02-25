@@ -9,9 +9,9 @@ namespace Streamberry.Domain.Entities
 
         public string Titulo { get; set; } = null!;
 
-        public string? MesLancamento { get; set; }
+        public string MesLancamento { get; set; }
 
-        public int? AnoLancamento { get; set; }
+        public int AnoLancamento { get; set; }
 
         public ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
 
