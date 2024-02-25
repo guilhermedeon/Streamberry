@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Streamberry.Application.Services;
 using Streamberry.Domain.DTOs;
 using Streamberry.Domain.Entities;
@@ -7,9 +8,11 @@ namespace Streamberry.WebAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class StreamingsController : ControllerBase
     {
         private readonly StreamingService _streamingService;
+        private readonly FilmeService _filmeService;
 
         public StreamingsController(StreamingService streamingService)
         {
@@ -69,6 +72,54 @@ namespace Streamberry.WebAPI.Controllers
             streaming.Nome = streamingRequestDTO.Nome;
             _streamingService.Update(streaming);
             return CreatedAtAction("GetStreaming", id, new StreamingResponseDTO(streaming));
+        }
+
+        [HttpPut("AddFilme")]
+        public async Task<ActionResult<StreamingResponseDTO>> AddFilme(int id, int idFilme)
+        {
+            var streaming = await _streamingService.GetById(id);
+            if (streaming == null)
+            {
+                return NotFound();
+            }
+            var filme = await _filmeService.GetById(idFilme);
+            if (filme == null)
+            {
+                return NotFound();
+            }
+            streaming.Filmes.Add(filme);
+            _streamingService.Update(streaming);
+            return CreatedAtAction("GetStreaming", id, new StreamingResponseDTO(streaming));
+        }
+
+        [HttpPut("RemoveFilme")]
+        public async Task<ActionResult<StreamingResponseDTO>> RemoveFilme(int id, int idFilme)
+        {
+            var streaming = await _streamingService.GetById(id);
+            if (streaming == null)
+            {
+                return NotFound();
+            }
+            var filme = await _filmeService.GetById(idFilme);
+            if (filme == null)
+            {
+                return NotFound();
+            }
+            streaming.Filmes.Remove(filme);
+            _streamingService.Update(streaming);
+            return CreatedAtAction("GetStreaming", id, new StreamingResponseDTO(streaming));
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var streaming = await _streamingService.GetById(id);
+            if (streaming == null)
+            {
+                return NotFound();
+            }
+            _streamingService.Remove(streaming);
+            return NoContent();
         }
     }
 }

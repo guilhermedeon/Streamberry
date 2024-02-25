@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
 using Streamberry.Domain.DTOs;
@@ -9,6 +10,7 @@ namespace Streamberry.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GenerosController : ControllerBase
     {
         private readonly GeneroService _generoService;
@@ -86,7 +88,7 @@ namespace Streamberry.WebAPI.Controllers
             {
                 genero.Nome = generoRequest.Nome;
                 _generoService.Update(genero);
-                return NoContent();
+                return CreatedAtAction("GetGenero", genero.Id, genero);
             }
         }
 
@@ -103,7 +105,7 @@ namespace Streamberry.WebAPI.Controllers
             {
                 genero.Filmes.Add(filme);
                 _generoService.Update(genero);
-                return NoContent();
+                return CreatedAtAction("GetFilmeById", filme.Id, filme);
             }
         }
 
@@ -120,7 +122,7 @@ namespace Streamberry.WebAPI.Controllers
             {
                 genero.Filmes.Remove(filme);
                 _generoService.Update(genero);
-                return NoContent();
+                return CreatedAtAction("GetFilmeById", filme.Id, filme);
             }
         }
 

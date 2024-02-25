@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Streamberry.Application.DTO.UsuarioDTO;
 using Streamberry.Application.Services;
+using Streamberry.Domain.DTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -12,39 +13,42 @@ namespace Streamberry.WebAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly UsuarioService _usuarioService;
-        private readonly IConfiguration configuration;
 
-        public UsuarioController(UsuarioService userService, IConfiguration configuration)
+        public UsuarioController(UsuarioService userService)
         {
             _usuarioService = userService;
-            this.configuration = configuration;
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] UsuarioLoginRequestDTO loginRequest)
+        public async Task<ActionResult<string>> Login([FromBody] UsuarioLoginRequestDTO loginRequest)
         {
-            var user = _usuarioService.Authenticate(loginRequest.Email, loginRequest.Senha);
+            var token = await _usuarioService.Authenticate(loginRequest.Email, loginRequest.Senha);
 
-            if (user == null)
+            if (token == null)
                 return Unauthorized();
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration.GetSection("SigningKey").Value);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                new Claim(ClaimTypes.Name, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                    // Add more claims as needed
-                }),
-                Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            return Ok(token);
+        }
 
-            return Ok(new { Token = tokenString });
+        [HttpPost("Register")]
+        public async Task<ActionResult<string>> Register([FromBody] UsuarioRegisterRequestDTO registerRequest)
+        {
+            var token = await _usuarioService.Register(registerRequest.Nome,registerRequest.Email, registerRequest.Senha);
+
+            if (token == null)
+                return Unauthorized();
+
+            return Ok(token);
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> Delete([FromBody] UsuarioLoginRequestDTO deleteRequest)
+        {
+            if (!await _usuarioService.Exists(deleteRequest.Email))
+                return NotFound();
+
+            await _usuarioService.Delete(deleteRequest.Email, deleteRequest.Senha);
+            return Ok();
         }
     }
 }

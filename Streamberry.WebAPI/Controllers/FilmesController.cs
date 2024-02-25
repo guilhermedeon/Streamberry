@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
 using Streamberry.Domain.DTOs;
@@ -9,6 +10,7 @@ namespace Streamberry.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FilmesController : ControllerBase
     {
         private readonly FilmeService _filmeService;
@@ -23,8 +25,8 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         // GET: api/Filmes
-        [HttpGet("GetAllFilmes")]
-        public async Task<ActionResult<IEnumerable<Filme>>> GetAllFilmes()
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<IEnumerable<FilmeResponseDTO>>> GetAllFilmes()
         {
             var filmes = await _filmeService.GetAll();
             var result = new List<FilmeResponseDTO>();
@@ -36,7 +38,7 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         [HttpGet("GetFilmeById")]
-        public async Task<ActionResult<Filme>> GetFilmeById(int id)
+        public async Task<ActionResult<FilmeResponseDTO>> GetFilmeById(int id)
         {
             var filme = await _filmeService.GetById(id);
             if (filme == null)
@@ -48,7 +50,7 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         [HttpGet("GetFilmeByTitle")]
-        public async Task<ActionResult<Filme>> GetFilmeByTitle(string titulo)
+        public async Task<ActionResult<FilmeResponseDTO>> GetFilmeByTitle(string titulo)
         {
             var filme = _filmeService.GetByTitle(titulo);
             if (filme == null)
@@ -60,7 +62,7 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Filme>> PostFilme(FilmeRequestDTO filme)
+        public async Task<ActionResult<FilmeResponseDTO>> PostFilme(FilmeRequestDTO filme)
         {
             if (_filmeService.GetByTitle(filme.Titulo) != null)
             {
@@ -77,7 +79,7 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutFilme(int id, FilmeRequestDTO filme)
+        public async Task<ActionResult<FilmeResponseDTO>> PutFilme(int id, FilmeRequestDTO filme)
         {
             var filmeEntity = await _filmeService.GetById(id);
             if (filmeEntity == null)
@@ -88,11 +90,11 @@ namespace Streamberry.WebAPI.Controllers
             filmeEntity.AnoLancamento = filme.AnoLancamento;
             filmeEntity.MesLancamento = filme.MesLancamento;
             _filmeService.Update(filmeEntity);
-            return NoContent();
+            return CreatedAtAction("GetFilmeById", filmeEntity.Id, filmeEntity);
         }
 
         [HttpPut("AddGenero")]
-        public async Task<IActionResult> AddGenero(int id, int generoId)
+        public async Task<ActionResult<FilmeResponseDTO>> AddGenero(int id, int generoId)
         {
             var filme = await _filmeService.GetById(id);
             var genero = await _generoService.GetById(generoId);
@@ -102,11 +104,11 @@ namespace Streamberry.WebAPI.Controllers
             }
             filme.Generos.Add(genero);
             _filmeService.Update(filme);
-            return NoContent();
+            return CreatedAtAction("GetFilmeById", filme.Id, filme);
         }
 
         [HttpPut("RemoveGenero")]
-        public async Task<IActionResult> RemoveGenero(int id, int generoId)
+        public async Task<ActionResult<FilmeResponseDTO>> RemoveGenero(int id, int generoId)
         {
             var filme = await _filmeService.GetById(id);
             var genero = await _generoService.GetById(generoId);
@@ -116,11 +118,11 @@ namespace Streamberry.WebAPI.Controllers
             }
             filme.Generos.Remove(genero);
             _filmeService.Update(filme);
-            return NoContent();
+            return CreatedAtAction("GetFilmeById", filme.Id, filme);
         }
 
         [HttpPut("AddStreaming")]
-        public async Task<IActionResult> AddStreaming(int id, int streamingId)
+        public async Task<ActionResult<FilmeResponseDTO>> AddStreaming(int id, int streamingId)
         {
             var filme = await _filmeService.GetById(id);
             var streaming = await streamingService.GetById(streamingId);
@@ -130,11 +132,11 @@ namespace Streamberry.WebAPI.Controllers
             }
             filme.Streamings.Add(streaming);
             _filmeService.Update(filme);
-            return NoContent();
+            return CreatedAtAction("GetFilmeById", filme.Id, filme);
         }
 
         [HttpPut("RemoveStreaming")]
-        public async Task<IActionResult> RemoveStreaming(int id, int streamingId)
+        public async Task<ActionResult<FilmeResponseDTO>> RemoveStreaming(int id, int streamingId)
         {
             var filme = await _filmeService.GetById(id);
             var streaming = await streamingService.GetById(streamingId);
@@ -144,11 +146,11 @@ namespace Streamberry.WebAPI.Controllers
             }
             filme.Streamings.Remove(streaming);
             _filmeService.Update(filme);
-            return NoContent();
+            return CreatedAtAction("GetFilmeById", filme.Id, filme);
         }
 
         [HttpDelete]
-        public async Task<ActionResult<Filme>> DeleteFilme(int id)
+        public async Task<ActionResult> DeleteFilme(int id)
         {
             var filme = await _filmeService.GetById(id);
             if (filme == null)
@@ -156,7 +158,7 @@ namespace Streamberry.WebAPI.Controllers
                 return NotFound();
             }
             _filmeService.Remove(filme);
-            return filme;
+            return NoContent();
         }
     }
 }

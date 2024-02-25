@@ -11,5 +11,11 @@ namespace Streamberry.Application.Services
         {
             _avaliacaoRepository = repository;
         }
+
+        public async Task<Avaliacao> GetByUsuarioIdAndFilmeId(int id, int idFilme)
+        {
+            var all = await _avaliacaoRepository.GetAll();
+            return all.FirstOrDefault(x => x.IdUsuario == id && x.IdFilme == idFilme);
+        }
     }
 }
