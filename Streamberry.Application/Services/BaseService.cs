@@ -3,14 +3,9 @@ using Streamberry.Domain.Entities;
 
 namespace Streamberry.Application.Services
 {
-    public abstract class BaseService<T, Y> where T : IBaseRepository<Y> where Y : BaseEntity
+    public abstract class BaseService<T, Y>(IBaseRepository<Y> repository) where T : IBaseRepository<Y> where Y : BaseEntity
     {
-        private readonly IBaseRepository<Y> _repository;
-
-        public BaseService(IBaseRepository<Y> repository)
-        {
-            _repository = repository;
-        }
+        private readonly IBaseRepository<Y> _repository = repository;
 
         public virtual async Task<Y> GetById(int id)
         {

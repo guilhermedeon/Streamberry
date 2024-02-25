@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Streamberry.Domain.Entities
+﻿namespace Streamberry.Domain.Entities
 {
     public partial class Filme : BaseEntity
     {
-
         public string Titulo { get; set; } = null!;
 
         public string MesLancamento { get; set; }

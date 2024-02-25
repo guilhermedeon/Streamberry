@@ -2,7 +2,5 @@
 
 namespace Streamberry.Domain.Abstractions
 {
-    public interface IFilmeRepository : IBaseRepository<Filme>
-    {
-    }
+    public interface IFilmeRepository : IBaseRepository<Filme>;
 }

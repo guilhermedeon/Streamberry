@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Streamberry.Domain.Entities
+﻿namespace Streamberry.Domain.Entities
 {
     public partial class Avaliacao : BaseEntity
     {
-
         public int Classificacao { get; set; }
 
         public string Comentario { get; set; }

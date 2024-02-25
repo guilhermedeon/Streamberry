@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Streamberry.Domain.Abstractions;
 using Streamberry.Domain.Entities;
-using Streamberry.Interfaces.Database;
 
 namespace Streamberry.Interfaces.Database.Repositories
 {
     public class StreamingRepository : IStreamingRepository
     {
-        private IStreamberryContext _context;
+        private readonly IStreamberryContext _context;
 
         public StreamingRepository(IStreamberryContext context)
         {

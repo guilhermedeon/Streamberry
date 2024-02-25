@@ -82,7 +82,7 @@ namespace Streamberry.WebAPI.Controllers
             {
                 return BadRequest("Usuário já avaliou este filme");
             }
-            var avaliacao = new Avaliacao() { Classificacao = avaliacaoRequestDTO.Classificacao, Comentario = avaliacaoRequestDTO.Comentario, IdFilme = avaliacaoRequestDTO.IdFilme, IdUsuario = user.Id};
+            var avaliacao = new Avaliacao() { Classificacao = avaliacaoRequestDTO.Classificacao, Comentario = avaliacaoRequestDTO.Comentario, IdFilme = avaliacaoRequestDTO.IdFilme, IdUsuario = user.Id };
             _avaliacaoService.Add(avaliacao);
             return CreatedAtAction("GetAvaliacao", avaliacao.Id, new AvaliacaoResponseDTO(avaliacao));
         }
@@ -112,7 +112,7 @@ namespace Streamberry.WebAPI.Controllers
         {
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var user = await _usuarioService.GetUserFromJWT(token);
-            var avaliacao = await _avaliacaoService.GetByUsuarioIdAndFilmeId(user.Id,idFilme);
+            var avaliacao = await _avaliacaoService.GetByUsuarioIdAndFilmeId(user.Id, idFilme);
             if (avaliacao == null)
             {
                 return NotFound();

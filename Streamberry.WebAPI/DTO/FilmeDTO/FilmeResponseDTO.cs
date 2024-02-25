@@ -2,7 +2,6 @@
 using Streamberry.WebAPI.DTO.AvaliacaoDTO;
 using Streamberry.WebAPI.DTO.GeneroDTO;
 using Streamberry.WebAPI.DTO.StreamingDTO;
-using System.Collections.Generic;
 
 namespace Streamberry.WebAPI.DTO.FilmeDTO
 {

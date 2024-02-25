@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NuGet.Common;
-using System.Reflection.Metadata;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Streamberry.WebAPI
 {
@@ -49,7 +46,7 @@ namespace Streamberry.WebAPI
                                   Id = "Bearer"
                               }
                           },
-                         new string[] {}
+                         Array.Empty<string>()
                     }
                 });
             });

@@ -1,6 +1,5 @@
 ﻿using Streamberry.Domain.Entities;
 using Streamberry.WebAPI.DTO.FilmeDTO;
-using System.Collections.Generic;
 
 namespace Streamberry.WebAPI.DTO.GeneroDTO
 {

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
 using Streamberry.Domain.Entities;
-using Streamberry.Infra.Data;
 using Streamberry.WebAPI.DTO.GeneroDTO;
 
 namespace Streamberry.WebAPI.Controllers
@@ -21,7 +19,6 @@ namespace Streamberry.WebAPI.Controllers
             _generoService = generoService;
             _filmeService = filmeService;
         }
-
 
         [HttpGet("GetAllGeneros")]
         public async Task<ActionResult<IEnumerable<GeneroResponseDTO>>> GetAllGeneros()
@@ -50,7 +47,7 @@ namespace Streamberry.WebAPI.Controllers
         [HttpGet("GetGeneroByName")]
         public async Task<ActionResult<GeneroResponseDTO>> GetGeneroByName(string nome)
         {
-            var genero = _generoService.GetByName(nome);
+            var genero = await _generoService.GetByName(nome);
             if (genero == null)
             {
                 return NotFound();
@@ -62,7 +59,7 @@ namespace Streamberry.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<GeneroResponseDTO>> PostGenero(GeneroRequestDTO generoRequest)
         {
-            if (_generoService.GetByName(generoRequest.Nome) != null)
+            if (await _generoService.GetByName(generoRequest.Nome) != null)
             {
                 return Conflict();
             }
@@ -142,4 +139,3 @@ namespace Streamberry.WebAPI.Controllers
         }
     }
 }
-

@@ -1,14 +1,9 @@
 ﻿using Streamberry.Domain.Abstractions;
 using Streamberry.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Streamberry.Application.Services
 {
-    public class FilmeService : BaseService<IFilmeRepository,Filme>
+    public class FilmeService : BaseService<IFilmeRepository, Filme>
     {
         private readonly IFilmeRepository _filmeRepository;
 
@@ -17,9 +12,10 @@ namespace Streamberry.Application.Services
             _filmeRepository = filmeRepository;
         }
 
-        public Filme GetByTitle(string nome)
+        public async Task<Filme> GetByTitle(string nome)
         {
-            return _filmeRepository.GetAll().Result.FirstOrDefault(f => f.Titulo == nome);
+            var result = await _filmeRepository.GetAll();
+            return result.FirstOrDefault(f => f.Titulo == nome);
         }
     }
 }

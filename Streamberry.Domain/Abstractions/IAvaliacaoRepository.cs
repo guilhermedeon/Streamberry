@@ -2,7 +2,5 @@
 
 namespace Streamberry.Domain.Abstractions
 {
-    public interface IAvaliacaoRepository : IBaseRepository<Avaliacao>
-    {
-    }
+    public interface IAvaliacaoRepository : IBaseRepository<Avaliacao>;
 }

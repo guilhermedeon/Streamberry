@@ -1,22 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Streamberry.Domain.Abstractions;
 using Streamberry.Domain.Entities;
-using Streamberry.Interfaces.Database;
 
 namespace Streamberry.Interfaces.Database.Repositories
 {
-    public class FilmeRepository : IFilmeRepository
+    public class FilmeRepository(IStreamberryContext context) : IFilmeRepository
     {
-        private IStreamberryContext _context;
-
-        public FilmeRepository(IStreamberryContext context)
-        {
-            _context = context;
-        }
+        private readonly IStreamberryContext _context = context;
 
         public void Add(Filme entity)
         {
-             _context.Filmes.Add(entity);
+            _context.Filmes.Add(entity);
             _context.SaveChangesAsync();
         }
 
@@ -38,9 +32,8 @@ namespace Streamberry.Interfaces.Database.Repositories
 
         public void Update(Filme entity)
         {
-             _context.Filmes.Update(entity);
+            _context.Filmes.Update(entity);
             _context.SaveChangesAsync();
         }
-
     }
 }

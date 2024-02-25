@@ -13,6 +13,5 @@ namespace Streamberry.WebAPI.DTO.AvaliacaoDTO
 
         [Required(ErrorMessage = "O Id do filme é obrigatório.")]
         public int IdFilme { get; set; }
-
     }
 }

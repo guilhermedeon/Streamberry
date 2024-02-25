@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Streamberry.Application;
 using Streamberry.Infra.Data;
 using Streamberry.Interfaces;

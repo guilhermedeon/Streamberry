@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Streamberry.Application.Services;
 using Streamberry.WebAPI.DTO.UsuarioDTO;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Streamberry.WebAPI.Controllers
 {
@@ -32,7 +27,7 @@ namespace Streamberry.WebAPI.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<string>> Register([FromBody] UsuarioRegisterRequestDTO registerRequest)
         {
-            var token = await _usuarioService.Register(registerRequest.Nome,registerRequest.Email, registerRequest.Senha);
+            var token = await _usuarioService.Register(registerRequest.Nome, registerRequest.Email, registerRequest.Senha);
 
             if (token == null)
                 return Unauthorized();

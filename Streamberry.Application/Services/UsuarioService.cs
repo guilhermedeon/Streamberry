@@ -2,13 +2,9 @@
 using Microsoft.IdentityModel.Tokens;
 using Streamberry.Domain.Abstractions;
 using Streamberry.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Streamberry.Application.Services
 {
@@ -47,7 +43,7 @@ namespace Streamberry.Application.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public async Task<string> Register(string Nome,string email, string senha)
+        public async Task<string> Register(string Nome, string email, string senha)
         {
             var user = await GetByEmail(email);
             if (user != null)

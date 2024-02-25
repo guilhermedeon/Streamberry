@@ -14,9 +14,10 @@ namespace Streamberry.WebAPI.Controllers
         private readonly StreamingService _streamingService;
         private readonly FilmeService _filmeService;
 
-        public StreamingsController(StreamingService streamingService)
+        public StreamingsController(StreamingService streamingService, FilmeService filmeService)
         {
             _streamingService = streamingService;
+            _filmeService = filmeService;
         }
 
         [HttpGet("GetAll")]
@@ -54,7 +55,7 @@ namespace Streamberry.WebAPI.Controllers
         }
 
         [HttpPost("Add")]
-        public async Task<ActionResult<StreamingResponseDTO>> Add(StreamingRequestDTO streamingRequestDTO)
+        public ActionResult<StreamingResponseDTO> Add(StreamingRequestDTO streamingRequestDTO)
         {
             var streaming = new Streaming() { Nome = streamingRequestDTO.Nome };
             _streamingService.Add(streaming);

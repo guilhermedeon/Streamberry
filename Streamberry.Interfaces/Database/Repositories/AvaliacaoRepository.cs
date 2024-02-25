@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Streamberry.Domain.Abstractions;
 using Streamberry.Domain.Entities;
-using Streamberry.Interfaces.Database;
 
 namespace Streamberry.Interfaces.Database.Repositories
 {
     public class AvaliacaoRepository : IAvaliacaoRepository
     {
-        private IStreamberryContext _context;
+        private readonly IStreamberryContext _context;
 
         public AvaliacaoRepository(IStreamberryContext context)
         {

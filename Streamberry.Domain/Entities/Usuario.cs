@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Streamberry.Domain.Entities
+﻿namespace Streamberry.Domain.Entities
 {
     public partial class Usuario : BaseEntity
     {

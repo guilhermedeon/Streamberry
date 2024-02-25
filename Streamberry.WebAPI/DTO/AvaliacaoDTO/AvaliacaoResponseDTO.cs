@@ -16,7 +16,7 @@ namespace Streamberry.WebAPI.DTO.AvaliacaoDTO
         {
             if (excludes == null)
             {
-                excludes = new();
+                excludes = [];
             }
             Id = avaliacao.Id;
             Classificacao = avaliacao.Classificacao;

@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Streamberry.Application.Services;
 using Streamberry.Domain.Entities;
-using Streamberry.Infra.Data;
 using Streamberry.WebAPI.DTO.FilmeDTO;
-using System.ComponentModel.DataAnnotations;
 
 namespace Streamberry.WebAPI.Controllers
 {
@@ -27,7 +24,7 @@ namespace Streamberry.WebAPI.Controllers
 
         // GET: api/Filmes
         [HttpGet("GetAll")]
-        public async Task<ActionResult<IEnumerable<FilmeResponseDTO>>> GetAllFilmes(bool paging,int? pageNumber, int? pageSize)
+        public async Task<ActionResult<IEnumerable<FilmeResponseDTO>>> GetAllFilmes(bool paging, int? pageNumber, int? pageSize)
         {
             var filmesDb = await _filmeService.GetAll();
             var filmes = filmesDb;
@@ -59,7 +56,7 @@ namespace Streamberry.WebAPI.Controllers
         [HttpGet("GetFilmeByTitle")]
         public async Task<ActionResult<FilmeResponseDTO>> GetFilmeByTitle(string titulo)
         {
-            var filme = _filmeService.GetByTitle(titulo);
+            var filme = await _filmeService.GetByTitle(titulo);
             if (filme == null)
             {
                 return NotFound();
@@ -105,7 +102,7 @@ namespace Streamberry.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<FilmeResponseDTO>> PostFilme(FilmeRequestDTO filme)
         {
-            if (_filmeService.GetByTitle(filme.Titulo) != null)
+            if (await _filmeService.GetByTitle(filme.Titulo) != null)
             {
                 return Conflict();
             }
@@ -116,7 +113,7 @@ namespace Streamberry.WebAPI.Controllers
                 MesLancamento = filme.MesLancamento
             };
             _filmeService.Add(filmeEntity);
-            return CreatedAtAction("GetFilmeById", filmeEntity.Id , filmeEntity);
+            return CreatedAtAction("GetFilmeById", filmeEntity.Id, filmeEntity);
         }
 
         [HttpPut]
@@ -203,4 +200,3 @@ namespace Streamberry.WebAPI.Controllers
         }
     }
 }
-
