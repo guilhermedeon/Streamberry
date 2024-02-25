@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Streamberry.Application;
 using Streamberry.Infra.Data;
 using Streamberry.Interfaces;
+using Streamberry.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationLayer();
 builder.Services.AddInterfaces();
 builder.Services.AddInfraData();
+builder.Services.AddStreamberryJwt(builder.Configuration);
 
 //Add and Setup WebAPI specific Classes
 builder.Services.AddControllers()
@@ -29,6 +31,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

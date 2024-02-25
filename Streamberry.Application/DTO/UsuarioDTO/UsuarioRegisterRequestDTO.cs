@@ -2,7 +2,7 @@
 
 namespace Streamberry.Domain.DTOs
 {
-    public class UsuarioRequestDTO
+    public class UsuarioRegisterRequestDTO
     {
         [Required(ErrorMessage = "O nome do usuário é obrigatório.")]
         public string Nome { get; set; }

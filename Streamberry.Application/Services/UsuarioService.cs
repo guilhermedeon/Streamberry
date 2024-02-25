@@ -16,5 +16,10 @@ namespace Streamberry.Application.Services
         {
             _usuarioRepository = usuarioRepository;
         }
+
+        public object Authenticate(string email, object password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
