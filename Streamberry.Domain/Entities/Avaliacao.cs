@@ -10,8 +10,8 @@
 
         public int IdUsuario { get; set; }
 
-        public Filme Filme { get; set; }
+        public virtual Filme Filme { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

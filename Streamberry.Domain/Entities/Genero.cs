@@ -4,6 +4,6 @@
     {
         public string Nome { get; set; } = null!;
 
-        public ICollection<Filme> Filmes { get; set; } = new List<Filme>();
+        public virtual ICollection<Filme> Filmes { get; set; } = new List<Filme>();
     }
 }

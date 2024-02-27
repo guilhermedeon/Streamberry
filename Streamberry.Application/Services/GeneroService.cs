@@ -17,5 +17,16 @@ namespace Streamberry.Application.Services
             var result = await _generoRepository.GetAll();
             return result.FirstOrDefault(g => g.Nome == nome);
         }
+
+        public async Task<List<Genero>> GetWithFilmesByDate(int initial, int final)
+        {
+            var generos = await _generoRepository.GetAll();
+            var result = generos.ToList();
+            foreach (var genero in result)
+            {
+                genero.Filmes = genero.Filmes.Where(f => f.AnoLancamento >= initial && f.AnoLancamento <= final).ToList();
+            }
+            return result;
+        }
     }
 }

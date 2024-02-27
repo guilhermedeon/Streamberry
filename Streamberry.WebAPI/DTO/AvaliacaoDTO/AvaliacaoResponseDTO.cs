@@ -24,12 +24,15 @@ namespace Streamberry.WebAPI.DTO.AvaliacaoDTO
             excludes.Add(typeof(AvaliacaoResponseDTO));
             if (!excludes.Contains(typeof(FilmeResponseDTO)) && avaliacao.Filme != null)
             {
-                excludes.Add(typeof(AvaliacaoResponseDTO));
-                Filme = new FilmeResponseDTO(avaliacao.Filme, excludes);
+                var ex = new List<Type>();
+                excludes.ForEach(e => ex.Add(e));
+                Filme = new FilmeResponseDTO(avaliacao.Filme, ex);
             }
             if (!excludes.Contains(typeof(UsuarioResponseDTO)) && avaliacao.Usuario != null)
             {
-                Usuario = new UsuarioResponseDTO(avaliacao.Usuario, excludes);
+                var ex = new List<Type>();
+                excludes.ForEach(e => ex.Add(e));
+                Usuario = new UsuarioResponseDTO(avaliacao.Usuario, ex);
             }
         }
     }

@@ -8,10 +8,10 @@
 
         public int AnoLancamento { get; set; }
 
-        public ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
+        public virtual ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
 
-        public ICollection<Genero> Generos { get; set; } = new List<Genero>();
+        public virtual ICollection<Genero> Generos { get; set; } = new List<Genero>();
 
-        public ICollection<Streaming> Streamings { get; set; } = new List<Streaming>();
+        public virtual ICollection<Streaming> Streamings { get; set; } = new List<Streaming>();
     }
 }

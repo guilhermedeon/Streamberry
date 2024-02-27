@@ -56,6 +56,22 @@ namespace Streamberry.WebAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("GetGeneroByDate")]
+        public async Task<ActionResult<GeneroMediaByYearResponse>> GetGeneroByDate(int initial, int final)
+        {
+            var generos = await _generoService.GetWithFilmesByDate(initial, final);
+            var result = new GeneroMediaByYearResponse()
+            {
+                InitialYear = initial,
+                FinalYear = final
+            };
+            foreach (var genero in generos)
+            {
+                result.Generos.Add(new GeneroResponseDTO(genero));
+            }
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<ActionResult<GeneroResponseDTO>> PostGenero(GeneroRequestDTO generoRequest)
         {

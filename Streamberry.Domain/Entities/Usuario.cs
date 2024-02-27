@@ -8,6 +8,6 @@
 
         public string Senha { get; set; } = null!;
 
-        public ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
+        public virtual ICollection<Avaliacao> Avaliacoes { get; set; } = new List<Avaliacao>();
     }
 }

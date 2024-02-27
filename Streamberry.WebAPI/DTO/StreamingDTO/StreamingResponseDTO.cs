@@ -22,7 +22,9 @@ namespace Streamberry.WebAPI.DTO.StreamingDTO
                 Filmes = new List<FilmeResponseDTO>();
                 foreach (var filme in streaming.Filmes)
                 {
-                    Filmes.Add(new FilmeResponseDTO(filme, excludes));
+                    var ex = new List<Type>();
+                    excludes.ForEach(e => ex.Add(e));
+                    Filmes.Add(new FilmeResponseDTO(filme, ex));
                 }
             }
         }
