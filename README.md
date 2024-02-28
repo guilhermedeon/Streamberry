@@ -14,7 +14,7 @@ A autenticação neste projeto é feita através de JSON Web Token (JWT).
 
 ## Tecnologias Utilizadas
 
-- C#
+- C# (.NET 8)
 - ASP.NET Core
 - Entity Framework Core
 - JWT (JSON Web Token)
